@@ -177,34 +177,41 @@ class _EmployeeDetailScreenState extends State<EmployeeDetailScreen> {
                             .colorScheme
                             .inversePrimary,
                       ),
-                    ) :ListView.separated(
-                        itemCount: empController.employeeHistoryModel?.data?.length??0,
-                        separatorBuilder: (context, i) =>
-                            Container(
-                              height: 1,
-                              color: Colors.grey.withOpacity(.2),
-                              margin: EdgeInsets.symmetric(vertical: 5),
-                            ),
-                        itemBuilder: (context, i) {
-                          return Row(
-                            children: [
-                              Expanded(
-                                  child: Text(
-                                    DateFormat("yyyy-MM-dd hh:ss a").format(DateTime.parse(empController.employeeHistoryModel?.data?[i].dateTime??DateTime.now().toString())),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 11),
-                                  )),
-                              Expanded(
-                                  child: Text("${empController.employeeHistoryModel?.data?[i].totalHours??"-"}",
+                    ) :RawScrollbar(
+                      thumbColor: Colors.white,
+                      thumbVisibility: true,
+                      controller: ctx.scrollControllerEmp,
+                      child: ListView.separated(
+                          controller: ctx.scrollControllerEmp,
+
+                          itemCount: empController.employeeHistoryModel?.data?.length??0,
+                          separatorBuilder: (context, i) =>
+                              Container(
+                                height: 1,
+                                color: Colors.grey.withOpacity(.2),
+                                margin: EdgeInsets.symmetric(vertical: 5),
+                              ),
+                          itemBuilder: (context, i) {
+                            return Row(
+                              children: [
+                                Expanded(
+                                    child: Text(
+                                      DateFormat("yyyy-MM-dd hh:mm:ss a").format(DateTime.parse(empController.employeeHistoryModel?.data?[i].dateTime??DateTime.now().toString())),
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: 11))),
-                              Expanded(
-                                  child: Text("${statusConvert(int.parse(ctx.employeeHistoryModel?.data?[i].status??"0")) ?? "-"}",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 11))),
-                            ],
-                          );
-                        }))
+                                          color: Colors.white, fontSize: 11),
+                                    )),
+                                Expanded(
+                                    child: Text("${empController.employeeHistoryModel?.data?[i].totalHours??"-"}",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 11))),
+                                Expanded(
+                                    child: Text("${statusConvert(int.parse(ctx.employeeHistoryModel?.data?[i].status??"0")) ?? "-"}",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 11))),
+                              ],
+                            );
+                          }),
+                    ))
               ],
             );
           }

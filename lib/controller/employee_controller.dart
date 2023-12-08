@@ -11,6 +11,7 @@ class EmployeeController extends GetxController {
   EmployeeListModel? employeeListModel;
   EmployeeHistoryModel? employeeHistoryModel;
   ScrollController scrollController = ScrollController();
+  ScrollController scrollControllerEmp = ScrollController();
   bool loading = false;
   TextEditingController searchController = TextEditingController();
 

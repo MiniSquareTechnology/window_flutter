@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:admin/api/api_urls.dart';
 import 'package:admin/api/http_service.dart';
@@ -7,18 +8,24 @@ import 'package:admin/helping_widgets.dart';
 import 'package:admin/keyboard_activity.dart';
 import 'package:admin/local_storage/local_storage.dart';
 import 'package:admin/model/user_model.dart';
+import 'package:admin/window_permission.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:system_idle/system_idle.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  //WindowPermission();
   runApp(const MyApp());
   //check();
   doWhenWindowReady(() {
